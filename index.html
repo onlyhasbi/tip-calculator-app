@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tip calculator app">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Tip calculator app</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/main.js" defer></script>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <div class="brand">
+      <img src="./images/logo.svg" alt="logo" class="image">
+    </div>
+
+    <div class="section-group"> 
+
+      <div class="calc-content">
+        <div class="bill-form-control">
+          <label for="input-bill" class="bill__label">Bill</label>
+          <input type="number" step="0.01" name="input-bill" id="input-bill" class="bill__input" placeholder="0">
+        </div>
+
+        <div class="tip-form-control">
+          <label class="tip__label" for="custom-tip">Select Tip %</label>
+          <ul class="tip__option">
+            <li><button class="btn btn-tip">5%</button></li>
+            <li><button class="btn btn-tip">10%</button></li>
+            <li><button class="btn btn-tip">15%</button></li>
+            <li><button class="btn btn-tip">25%</button></li>
+            <li><button class="btn btn-tip">50%</button></li>
+            <li><input type="number" step="0.01" id="custom-tip" class="btn custom-tip" placeholder="Custom"></li>
+          </ul>
+        </div>
+
+        <div class="people-form-control">
+          <span class="label-group">
+            <label for="input-people" class="people__label">Number of People</label>
+            <label class="people__label people__info">Can't be zero</label>
+          </span>
+          <input type="number" name="input-people" id="input-people" placeholder="0" class="people__input">
+        </div>
+      </div>
+
+      <div class="result-content">
+        <div class="list amount-group">
+          <label class="amount__label">Tip Amount <small class="small">/Person</small></label>
+          <h2 class="amount__result">$0.00</h2>
+        </div>
+        <div class="list total-group">
+          <label class="total__label">Total <small class="small">/Person</small></label>
+          <h2 class="total__result">$0.00</h2>
+        </div>
+        <button class="btn btn-reset" disabled>Reset</button>
+      </div>
+
+    </div>
+
+
+  </main>
+
+</body>
+
+</html>
