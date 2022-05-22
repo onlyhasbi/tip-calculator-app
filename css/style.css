@@ -237,9 +237,13 @@ body {
   justify-content: space-between;
 }
 
-.people__info {
-  color: #e67f70;
+.error .people__input {
+  outline: 2px solid #e67f70;
+}
+
+.message {
   visibility: hidden;
+  color: #e67f70;
 }
 
 .calc-content {

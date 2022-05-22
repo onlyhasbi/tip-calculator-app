@@ -1,152 +1,106 @@
-const buttonTip = document.querySelectorAll(".btn-tip");
-
 const bill = document.querySelector(".bill__input");
+const buttonTip = document.querySelectorAll(".btn-tip");
 const customTip = document.querySelector(".custom-tip");
 const numberOfPeople = document.querySelector(".people__input");
-
 const amountResult = document.querySelector(".amount__result");
 const totalResult = document.querySelector(".total__result");
-
 const buttonReset = document.querySelector(".btn-reset");
 
-function isTipButtonSelected() {
-  var isSelected = false;
-
-  for (let item = 0; item < buttonTip.length; item++) {
-    if (buttonTip[item].classList.contains("selected")) {
-      return (isSelected = true);
-    }
-  }
-  return isSelected;
-}
-
-function isCustomTipFill() {
-  return !!customTip.value;
-}
-
-function tipValueList(value) {
-  if (value === "5%") return 0.05;
-  if (value === "10%") return 0.1;
-  if (value === "15%") return 0.15;
-  if (value === "25%") return 0.25;
-  if (value === "50%") return 0.5;
-}
-
-function getSelectedTipValue() {
-  for (let item = 0; item < buttonTip.length; item++) {
-    if (buttonTip[item].classList.contains("selected")) {
-      return tipValueList(buttonTip[item].textContent);
-    }
-  }
-}
-
-function getCustomTipValue() {
-  var tipValue = 0;
-  if (customTip.value != "") tipValue = customTip.value;
-
-  if (tipValue > 0) return tipValue / 100;
-  return 0;
-}
-
-function calcTipAmount() {
-  var billValue = 0;
-  if (!!bill.value) billValue = bill.value;
-
-  var tip = 0;
-  if (isCustomTipFill()) {
-    tip = getCustomTipValue().toFixed(2);
-  }
-
-  if (isTipButtonSelected()) {
-    tip = getSelectedTipValue();
-  }
-
-  if (isCustomTipFill() && isTipButtonSelected()) {
-    tip = getCustomTipValue();
-  }
-
-  var peopleValue = 0;
-  if (!!numberOfPeople.value) peopleValue = numberOfPeople.value;
-
-  var tipAmountResult = 0;
-  if (billValue && tip && peopleValue) {
-    tipAmountResult = (billValue / peopleValue) * tip;
-    tipAmountResult = Math.floor(tipAmountResult * 100) / 100;
-  }
-
-  return tipAmountResult.toFixed(2);
-}
-
-function calcTotalAmount() {
-  var totalAmountResult = 0;
-  if (calcTipAmount() > 0) {
-    var totalAmountResult = bill.value / calcTipAmount();
-    totalAmountResult = Math.floor(totalAmountResult * 100) / 100;
-    return totalAmountResult.toFixed(2);
-  }
-  return totalAmountResult.toFixed(2);
-}
-
-function fireChange() {
-  amountResult.textContent = "$" + calcTipAmount();
-  totalResult.textContent = "$" + calcTotalAmount();
-
-  if (calcTipAmount() > 0 && calcTotalAmount() > 0) {
-    buttonReset.classList.add("btn-active");
-  } else {
-    buttonReset.classList.remove("btn-active");
-  }
-}
-
-const clearSelected = () => {
-  buttonTip.forEach((item) => {
-    item.classList.remove("selected");
-  });
+let values = {
+  bill: 0,
+  tip: 0,
+  people: 1,
 };
 
-buttonTip.forEach((item) => {
-  item.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+const calc = () => {
+  console.log(values);
 
-    const selectedExist = e.currentTarget.classList.contains("selected");
-    if (selectedExist) {
-      e.currentTarget.classList.remove("selected");
-    }
-
-    if (!selectedExist) {
-      clearSelected();
-      e.currentTarget.classList.add("selected");
-    }
-
-    fireChange();
-  });
-});
-
-bill.addEventListener("input", () => fireChange());
-customTip.addEventListener("input", () => fireChange());
-numberOfPeople.addEventListener("input", (e) => {
-  var peopleValue = e.currentTarget.value > 0;
-  var labelInfo = document.querySelector(".people__info");
-
-  if (!peopleValue) {
-    labelInfo.style.visibility = "visible";
-    numberOfPeople.style.outline = "1px solid #e67f70";
+  if (values.bill) {
+    const tipPeople = values.bill / (values.people || 1);
+    const tipAmount = tipPeople * values.tip;
+    const totalAmount = tipPeople + tipAmount;
+    amountResult.textContent = `$${tipAmount.toFixed(2)}`;
+    totalResult.textContent = `$${totalAmount.toFixed(2)}`;
   } else {
-    labelInfo.style.visibility = "hidden";
-    numberOfPeople.style.outline = "0";
+    amountResult.textContent = `$0.00`;
+    totalResult.textContent = `$0.00`;
+  }
+};
+
+const setError = (data, flag) => {
+  const classForm = data.concat("-form-control");
+  const form = document.querySelector(`.${classForm}`);
+  const message = document.querySelector(".message");
+
+  if (flag) {
+    form.classList.add("error");
+    message.style.visibility = "visible";
+  } else {
+    form.classList.remove("error");
+    message.style.visibility = "hidden";
+  }
+};
+
+const setInput = (e, data) => {
+  if (e.currentTarget.value === "0" && data === "people") {
+    setError(data, true);
+    return;
   }
 
-  fireChange();
-});
+  setError(data, false);
 
-buttonReset.addEventListener("click", () => {
+  if (data === "tip") {
+    removeSelectedTip();
+    values[data] = +e.currentTarget.value / 100;
+  } else {
+    values[data] = +e.currentTarget.value;
+  }
+
+  calc();
+};
+
+const removeSelectedTip = () => {
+  const selected = document.querySelector(".selected");
+  if (selected) selected.classList.remove("selected");
+};
+
+const reset = () => {
+  removeSelectedTip();
   bill.value = "";
   customTip.value = "";
   numberOfPeople.value = "";
-  clearSelected();
-  amountResult.textContent = "$0.00";
-  totalResult.textContent = "$0.00";
-  buttonReset.classList.remove("btn-active");
+  values.bill = 0;
+  values.tip = 0;
+  values.people = 0;
+  calc();
   bill.focus();
+};
+
+buttonReset.addEventListener("click", reset);
+buttonTip.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    const target = e.currentTarget;
+    const currentSelected = document.querySelector(".selected");
+    const isSelected = target.classList.contains("selected");
+    customTip.value = "";
+
+    if (isSelected) {
+      target.classList.remove("selected");
+      values.tip = 0;
+      calc();
+      return;
+    } else {
+      if (!!currentSelected) currentSelected.classList.remove("selected");
+      target.classList.add("selected");
+    }
+
+    var tip = target.textContent;
+    tip = tip.replace("%", "");
+    values.tip = +tip / 100;
+    calc();
+  });
 });
+
+bill.addEventListener("input", (e) => setInput(e, "bill"));
+customTip.addEventListener("input", (e) => setInput(e, "tip"));
+numberOfPeople.addEventListener("input", (e) => setInput(e, "people"));

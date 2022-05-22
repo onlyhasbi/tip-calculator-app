@@ -22,3 +22,4 @@ bill.addEventListener("input", function (e) {
     target.setSelectionRange(state.selectionStart, state.selectionEnd);
   }
 });
+
