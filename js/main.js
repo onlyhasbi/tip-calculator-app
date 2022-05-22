@@ -13,18 +13,19 @@ let values = {
 };
 
 const calc = () => {
-  console.log(values);
-
   if (values.bill) {
     const tipPeople = values.bill / (values.people || 1);
-    const tipAmount = tipPeople * values.tip;
-    const totalAmount = tipPeople + tipAmount;
+    var tipAmount = tipPeople * values.tip;
+    var totalAmount = tipPeople + tipAmount;
+
     amountResult.textContent = `$${tipAmount.toFixed(2)}`;
     totalResult.textContent = `$${totalAmount.toFixed(2)}`;
   } else {
     amountResult.textContent = `$0.00`;
     totalResult.textContent = `$0.00`;
   }
+
+  buttonReset.classList.toggle("btn-active", !!totalAmount || !!tipAmount);
 };
 
 const setError = (data, flag) => {
@@ -72,6 +73,7 @@ const reset = () => {
   values.bill = 0;
   values.tip = 0;
   values.people = 0;
+  buttonReset.classList.remove("btn-active");
   calc();
   bill.focus();
 };
