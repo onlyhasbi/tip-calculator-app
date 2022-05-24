@@ -50,15 +50,80 @@ body {
 
 .brand {
   padding-top: 5rem;
-  padding-bottom: 4rem;
+  padding-bottom: 3.1rem;
   text-align: center;
 }
 
 .section-group {
-  padding: 3.6rem 2.4rem;
+  padding: 3.2rem 2.5rem 3.2rem;
   background: var(--White);
   border-top-left-radius: 2.5rem;
   border-top-right-radius: 2.5rem;
+}
+
+.calc-content {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.bill__label,
+.tip__label,
+.people__label {
+  font-size: 1.6rem;
+  color: var(--Grayish-cyan);
+  display: block;
+}
+
+.bill__label {
+  margin-bottom: 0.5rem;
+}
+
+.tip__label {
+  margin-bottom: 1.5rem;
+}
+
+.people__label {
+  margin-bottom: 0.7rem;
+}
+
+.bill-form-control {
+  margin-bottom: 3.2rem;
+}
+
+.bill__input {
+  background-image: url("../images/icon-dollar.svg");
+  background-repeat: no-repeat;
+  background-position: left 1.9rem center;
+}
+
+.bill__input,
+.custom-tip,
+.people__input {
+  text-align: right;
+  color: var(--Very-dark-cyan);
+}
+
+.bill__input,
+.people__input {
+  background: var(--Very-light-grayish-cyan);
+  border: 0;
+  outline: 0;
+  width: 100%;
+  font-size: 2.45rem;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.7rem;
+}
+
+.tip-form-control {
+  margin-bottom: 3.1rem;
+}
+
+.tip__option {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  gap: 1.7rem;
 }
 
 .btn {
@@ -71,20 +136,10 @@ body {
   display: block;
 }
 
-.btn-reset {
-  width: 100%;
-  max-width: 100%;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  background: #0d686d;
-  color: #065d61;
-  text-transform: uppercase;
-  font-size: 2rem;
-}
-
-.btn-reset:hover {
-  background: #9fe8df;
-  color: var(--Very-dark-cyan);
+.btn-tip {
+  background: var(--Very-dark-cyan);
+  color: var(--White);
+  text-align: center;
 }
 
 .btn-tip:hover {
@@ -94,84 +149,21 @@ body {
 
 .selected {
   background: var(--Strong-cyan) !important;
-}
-
-.bill__label,
-.tip__label,
-.people__label {
-  font-size: 1.6rem;
-  color: var(--Grayish-cyan);
-  display: block;
-}
-
-.bill__label {
-  margin-bottom: 1rem;
-}
-
-.tip__label {
-  margin-bottom: 1.5rem;
-}
-
-.people__label {
-  margin-bottom: 0.7rem;
-}
-
-.bill__input,
-.custom-tip,
-.people__input {
-  text-align: right;
-  color: var(--Very-dark-cyan);
-  /* opacity: 1; */
-}
-
-.bill__input,
-.people__input {
-  background: var(--Very-light-grayish-cyan);
-  border: 0;
-  outline: 0;
-  width: 100%;
-  font-size: 2.4rem;
-  border-radius: 0.5rem;
-  padding: 1rem 1.5rem;
+  color: var(--Very-dark-cyan) !important;
 }
 
 .custom-tip,
 .btn-tip {
-  width: 14.5rem;
+  width: 14.6rem;
   max-width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 
 .custom-tip {
   background: var(--Very-light-grayish-cyan);
-  padding-right: 1.5rem;
+  padding-right: 1.6rem;
   text-align: right;
-}
-
-.btn-tip {
-  background: var(--Very-dark-cyan);
-  color: var(--White);
-  text-align: center;
-}
-
-.tip__option {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  justify-content: center;
-  gap: 1.7rem;
-}
-
-.bill-form-control {
-  position: relative;
-  margin-bottom: 3.4rem;
-}
-
-.bill__input {
-  background-image: url("../images/icon-dollar.svg");
-  background-repeat: no-repeat;
-  background-position: left 1.7rem center;
 }
 
 .bill__input:focus,
@@ -180,13 +172,9 @@ body {
   outline: 2px solid #9fe8df;
 }
 
-.tip-form-control {
-  margin-bottom: 3.7rem;
-}
-
 .people-form-control {
   position: relative;
-  margin-bottom: 3.2rem;
+  margin-bottom: 3rem;
 }
 
 .people__input {
@@ -197,21 +185,26 @@ body {
 
 .result-content {
   background: var(--Very-dark-cyan);
-  border-radius: 1rem;
-  padding: 3.6rem 2.2rem 2.4rem;
+  border-radius: 1.5rem;
+  padding: 3.6rem 2.2rem 2.3rem;
 }
 
 .list {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.total-group {
+  margin-bottom: 3rem;
 }
 
 .amount__label,
 .total__label {
   color: var(--White);
-  font-size: 1.6;
+  font-size: 1.6rem;
+  letter-spacing: 0.02rem;
 }
 
 .amount__result,
@@ -228,8 +221,8 @@ body {
 }
 
 .btn-active {
-  background: var(--Strong-cyan);
-  color: var(--Very-dark-cyan);
+  background: var(--Strong-cyan) !important;
+  color: var(--Very-dark-cyan) !important;
 }
 
 .label-group {
@@ -246,124 +239,149 @@ body {
   color: #e67f70;
 }
 
-.calc-content {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.btn-reset {
+  width: 100%;
+  max-width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background: #0d686d;
+  color: #065d61;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.btn-reset:hover {
+  background: #9fe8df;
+  color: var(--Very-dark-cyan);
 }
 
 @media (min-width: 800px) {
   .container {
-    padding-bottom: 22rem;
+    padding-bottom: 24rem;
   }
 
   .brand {
-    padding-top: 15rem;
+    padding-top: 16.25rem;
     padding-bottom: 8rem;
   }
 
   .section-group {
     width: 100%;
-    max-width: 85rem;
+    max-width: 92rem;
     margin: 0 auto;
     border-radius: 2.3rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 3rem;
+    align-items: flex-start;
+    padding: 3.2rem 3.3rem;
   }
 
   .calc-content {
-    padding: 1.4rem;
+    padding: 0.5rem 1.5rem 1rem;
     width: 100%;
-    max-width: 38.1rem;
+    max-width: 41rem;
   }
 
-  .tip__option {
-    gap: 1.3rem;
+  .result-content {
+    width: 100%;
+    max-width: 41.2rem;
+    padding: 4rem 3.8rem 3.95rem 4rem;
   }
 
-  .tip-form-control.people-form-control {
-    margin-bottom: 3.7rem;
-  }
-
-  .btn-tip,
-  .custom-tip {
-    width: 10.8rem;
-    max-width: 100%;
-    font-size: 2.3rem;
-  }
-
-  .btn-tip,
-  .custom-tip {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .custom-tip {
-    letter-spacing: -0.5px;
-  }
+  /* calc section */
 
   .bill__label,
   .tip__label,
   .people__label {
     font-size: 1.5rem;
-  }
-
-  .bill__label,
-  .people__label {
-    margin-bottom: 0.5rem;
-  }
-
-  .tip__label {
-    margin-bottom: 1.5rem;
-  }
-
-  .bill__input,
-  .people__input {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    font-size: 2.25rem;
-  }
-
-  .people-form-control {
+    letter-spacing: 0.06rem;
     margin-bottom: 0;
   }
 
-  .result-content {
-    width: 100%;
-    max-width: 38.1rem;
-    padding: 4rem 3.7rem 3.7rem;
+  .bill-form-control {
+    margin-top: 0.88rem;
   }
 
+  .bill__label {
+    margin-bottom: 0.75rem;
+  }
+
+  .bill__input {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1.85rem;
+    letter-spacing: -0.05rem;
+    font-size: 2.45rem;
+  }
+
+  .tip__option {
+    justify-content: start;
+    margin-top: 1.75rem;
+  }
+
+  .btn-tip,
+  .custom-tip {
+    width: 11.5rem;
+    font-size: 2.3rem;
+    padding-top: 0.65rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .custom-tip {
+    letter-spacing: 0.05rem;
+  }
+
+  .people-form-control,
+  .bill-form-control,
+  .tip-form-control {
+    margin-bottom: 0;
+  }
+
+  .tip-form-control,
+  .people-form-control {
+    margin-top: 4.2rem;
+  }
+
+  .people__input {
+    margin-top: 0.7rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.55rem;
+    padding-right: 1.8rem;
+    font-size: 2.42rem;
+  }
+
+  /* result section */
   .list {
-    margin-bottom: 2.8rem;
+    margin-bottom: 2.7rem;
   }
 
   .list:last-of-type {
-    margin-bottom: 11rem;
+    margin-bottom: 12.3rem;
   }
 
   .amount__label,
   .total__label {
-    font-size: 1.45rem;
+    font-size: 1.6rem;
     letter-spacing: 0.1px;
+    padding-top: 0.8rem;
   }
 
   .small {
-    font-size: 1.25;
+    font-size: 1.37rem;
     letter-spacing: -0.25px;
   }
 
   .amount__result,
   .total__result {
-    font-size: 4.3rem;
+    font-size: 4.6rem;
     letter-spacing: 0.5px;
   }
 
   .btn-reset {
-    font-size: 1.7rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    letter-spacing: 0.75px;
+    font-size: 1.95rem;
+    font-weight: 700;
+    padding-top: 1.15rem;
+    padding-bottom: 0.85rem;
+    letter-spacing: 0.5px;
   }
 }

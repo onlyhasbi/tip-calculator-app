@@ -15,8 +15,9 @@ let values = {
 const calc = () => {
   if (values.bill) {
     const tipPeople = values.bill / (values.people || 1);
-    var tipAmount = tipPeople * values.tip;
-    var totalAmount = tipPeople + tipAmount;
+    var originalTipAmount = tipPeople * values.tip;
+    var tipAmount = parseInt(tipPeople * values.tip * 100) / 100;
+    var totalAmount = tipPeople + originalTipAmount;
 
     amountResult.textContent = `$${tipAmount.toFixed(2)}`;
     totalResult.textContent = `$${totalAmount.toFixed(2)}`;
@@ -25,7 +26,10 @@ const calc = () => {
     totalResult.textContent = `$0.00`;
   }
 
-  buttonReset.classList.toggle("btn-active", !!totalAmount || !!tipAmount);
+  buttonReset.classList.toggle(
+    "btn-active",
+    !!totalAmount || !!originalTipAmount
+  );
 };
 
 const setError = (data, flag) => {
